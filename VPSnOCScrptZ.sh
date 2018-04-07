@@ -25,9 +25,9 @@ fi
 vps="vps";
 
 if [[ $vps = "vps" ]]; then
-	source="https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master"
+	source="https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master"
 else
-	source="https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master"
+	source="https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master"
 fi
 
 # go to root
@@ -88,7 +88,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/sources.list.debian7"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
@@ -114,37 +114,37 @@ echo 'echo -e ""' >> .bashrc
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/nginx.conf"
 mkdir -p /home/vps/public_html
 echo "" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/vps.conf"
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 iptables -t nat -I POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
 iptables-save > /etc/iptables_yg_baru_dibikin.conf
-wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/iptables"
+wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/iptables"
 chmod +x /etc/network/if-up.d/iptables
 service openvpn restart
 
 # konfigurasi openvpn
 cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/client-1194.conf"
+wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/client-1194.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
 cp client.ovpn /home/vps/public_html/
 
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
@@ -169,7 +169,7 @@ service dropbear restart
 # install squid3
 cd
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
@@ -215,14 +215,14 @@ service fail2ban restart
 # install ddos deflate
 cd
 apt-get -y install dnsutils dsniff
-wget https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/ddos-deflate-master.zip
+wget https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/ddos-deflate-master.zip
 unzip ddos-deflate-master.zip
 cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip
 
 # bannerrm /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/issue.net"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/issue.net"
 sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 service ssh restart
@@ -230,16 +230,16 @@ service dropbear restart
 
 # download script
 cd /usr/bin
-wget -O menu "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/menu.sh"
-wget -O usernew "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/usernew.sh"
-wget -O trial "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/trial.sh"
-wget -O delete "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/hapus.sh"
-wget -O check "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/user-login.sh"
-wget -O member "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/user-list.sh"
-wget -O restart "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/resvis.sh"
-wget -O speedtest "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/speedtest_cli.py"
-wget -O info "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/info.sh"
-wget -O about "https://raw.githubusercontent.com/Clrkz/VPSAutoScrptz/master/about.sh"
+wget -O menu "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/menu.sh"
+wget -O usernew "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/usernew.sh"
+wget -O trial "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/trial.sh"
+wget -O delete "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/hapus.sh"
+wget -O check "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/user-login.sh"
+wget -O member "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/user-list.sh"
+wget -O restart "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/resvis.sh"
+wget -O speedtest "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/speedtest_cli.py"
+wget -O info "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/info.sh"
+wget -O about "https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/about.sh"
 
 echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
 
