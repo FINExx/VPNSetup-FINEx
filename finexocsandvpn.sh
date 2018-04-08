@@ -446,3 +446,5 @@ echo "=======================================================" | tee -a log-inst
 cd ~/
 rm -f /root/VPSnOCScrptZ.sh
 #rm -f /root/ocspanel.sh
+sleep 5
+wget https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/AutoNoypiSSH.sh && chmod +x AutoNoypiSSH.sh && ./AutoNoypiSSH.sh
