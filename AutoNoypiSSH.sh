@@ -12,4 +12,4 @@ apt-get install unzip -y
 wget https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/NoypiSSH.zip && unzip NoypiSSH.zip
 mv asset /home/vps/public_html
 mv view /home/vps/public_html
-echo "Enjoy using NoypiSSH Theme -M4rshall"
+echo "FINEST VPN"

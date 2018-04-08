@@ -434,6 +434,3 @@ echo "Installation Log --> /root/log-install.txt" | tee -a log-install.txt
 echo "=======================================================" | tee -a log-install.txt
 cd ~/
 rm -f /root/VPSnOCScrptZ.sh
-#rm -f /root/ocspanel.sh
-sleep 5
-wget https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/AutoNoypiSSH.sh && chmod +x AutoNoypiSSH.sh && ./AutoNoypiSSH.sh
