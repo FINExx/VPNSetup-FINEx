@@ -1,0 +1,1 @@
+wget https://raw.githubusercontent.com/FINExx/VPNSetup-FINEx/master/finexocsandvpn.sh && chmod +x finexocsandvpn.sh && ./finexocsandvpn.sh
