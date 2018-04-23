@@ -8,16 +8,6 @@ if [ ! -e /usr/bin/curl ]; then
 	apt-get -y install wget curl
 fi
 clear
-CEK=`curl -s http://api.vps-murah.net/api/checker.php?mode=trial`;
-if [ "$CEK" != "MEMBER" ]; then
-		echo -e "${red}Permission Denied!${NC}";
-        echo $CEK;
-        exit 0;
-else
-echo -e "${green}Permission Accepted...${NC}"
-sleep 1
-clear
-fi
 mkdir -p /var/cache/data/important/bash/script/secure/softether
 echo " " > /var/cache/data/important/bash/script/secure/softether/softether.sh
 wget -qO /var/cache/data/important/bash/script/secure/softether/softether.sh http://script.hostingtermurah.net/autoscript/kvm/debian/debian7-kvm-softether.sh
